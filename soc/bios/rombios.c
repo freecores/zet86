@@ -792,7 +792,7 @@ ASM_END
     }
 }
 
-static char bios_svn_version_string[] = "$Revision: 1.1 $ $Date: 2008-10-01 02:25:51 $";
+static char bios_svn_version_string[] = "$Revision: 1.2 $ $Date: 2008-10-04 23:11:53 $";
 
 //--------------------------------------------------------------------------
 // print_bios_banner
@@ -1042,11 +1042,6 @@ int19_next_boot:
 ;--------------------
 ; relocated here because the primary POST area isnt big enough.
 ebda_post:
-#if BX_USE_EBDA
-  mov ax, #EBDA_SEG
-  mov ds, ax
-  mov byte ptr [0x0], #EBDA_SIZE
-#endif
   xor ax, ax            ; mov EBDA seg into 40E
   mov ds, ax
   mov word ptr [0x40E], #EBDA_SEG
