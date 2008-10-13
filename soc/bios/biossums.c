@@ -1,5 +1,5 @@
 /*
- * $Id: biossums.c,v 1.1 2008-10-01 02:25:51 zeus Exp $
+ * $Id: biossums.c,v 1.2 2008-10-13 00:24:30 zeus Exp $
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
