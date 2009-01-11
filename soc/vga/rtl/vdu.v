@@ -1,13 +1,21 @@
-// Video Display terminal
-// John Kent
-// 3th September 2004
-// Assumes a pixel clock input of 50 MHz
-// Generates a 12.5MHz CPU Clock output
-//
-// Display Format is:
-// 80 characters across	by 25 characters down.
-// 8 horizonal pixels / character
-// 16 vertical scan lines / character (2 scan lines/row)
+/*
+ *  Copyright (c) 2008  Zeus Gomez Marmolejo <zeus@opencores.org>
+ *
+ *  This file is part of the Zet processor. This processor is free
+ *  hardware; you can redistribute it and/or modify it under the terms of
+ *  the GNU General Public License as published by the Free Software
+ *  Foundation; either version 3, or (at your option) any later version.
+ *
+ *  Zet is distrubuted in the hope that it will be useful, but WITHOUT
+ *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ *  or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public
+ *  License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Zet; see the file COPYING. If not, see
+ *  <http://www.gnu.org/licenses/>.
+ */
+
 `timescale 1ns/10ps
 
 module vdu (
@@ -34,17 +42,21 @@ module vdu (
 
   // Net, registers and parameters
 
-  // Synchronization constants
-  parameter HOR_DISP_END = 10'd640; // Last horizontal pixel displayed
-  parameter HOR_SYNC_BEG = 10'd679; // Start of horizontal synch pulse
-  parameter HOR_SYNC_END = 10'd775; // End of Horizontal Synch pulse
+  // Synchronization constants, these values are taken from:
+  //  http://tinyvga.com/vga-timing/640x400@70Hz
+
+  parameter HOR_DISP_END = 10'd639; // Last horizontal pixel displayed
+  parameter HOR_SYNC_BEG = 10'd655; // Start of horizontal synch pulse
+  parameter HOR_SYNC_END = 10'd751; // End of Horizontal Synch pulse
   parameter HOR_SCAN_END = 10'd799; // Last pixel in scan line
   parameter HOR_DISP_CHR = 80;      // Number of characters displayed per row
+  parameter HOR_VIDEO_ON = 10'd7;   // When to start displaying characters
+  parameter HOR_VIDEO_OFF = 10'd647; // When to stop displaying characters
 
   parameter VER_DISP_END = 9'd399;  // last row displayed
-  parameter VER_SYNC_BEG = 9'd413;  // start of vertical synch pulse
-  parameter VER_SYNC_END = 9'd414;  // end of vertical synch pulse
-  parameter VER_SCAN_END = 9'd450;  // Last scan row in the frame
+  parameter VER_SYNC_BEG = 9'd411;  // start of vertical synch pulse
+  parameter VER_SYNC_END = 9'd413;  // end of vertical synch pulse
+  parameter VER_SCAN_END = 9'd448;  // Last scan row in the frame
   parameter VER_DISP_CHR = 6'd25;   // Number of character rows displayed
 
   reg        cursor_on_v;
@@ -228,9 +240,9 @@ module vdu (
                     : ((h_count==HOR_SYNC_END) ? v_count + 9'b1 : v_count);
         vert_sync  <= (v_count==VER_SYNC_BEG) ? 1'b0
                     : ((v_count==VER_SYNC_END) ? 1'b1 : vert_sync);
-        video_on_h <= (h_count==HOR_SCAN_END) ? 1'b1
-                    : ((h_count==HOR_DISP_END) ? 1'b0 : video_on_h);
-        video_on_v <= (v_count==VER_SYNC_BEG) ? 1'b1
+        video_on_h <= (h_count==HOR_VIDEO_ON) ? 1'b1
+                    : ((h_count==HOR_VIDEO_OFF) ? 1'b0 : video_on_h);
+        video_on_v <= (v_count==VER_SCAN_END) ? 1'b1
                     : ((v_count==VER_DISP_END) ? 1'b0 : video_on_v);
         cursor_on_h <= (h_count[9:3] == reg_hcursor[6:0]);
         cursor_on_v <= (v_count[8:2] == { reg_vcursor[4:0], 2'b11 })

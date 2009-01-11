@@ -229,7 +229,7 @@ init_vga_card:
 
 #if defined(USE_BX_INFO) || defined(DEBUG)
 msg_vga_init:
-.ascii "VGABios $Id: vgabios.c,v 1.3 2008-11-14 03:31:19 zeus Exp $"
+.ascii "VGABios $Id: vgabios.c,v 1.4 2009-01-11 03:22:12 zeus Exp $"
 .byte 0x0d,0x0a,0x00
 #endif
 ASM_END
