@@ -35,10 +35,10 @@
 
 //  CVS Log
 //
-//  $Id: div_su.v,v 1.4 2009-01-11 03:22:12 zeus Exp $
+//  $Id: div_su.v,v 1.5 2009-01-13 08:20:37 zeus Exp $
 //
-//  $Date: 2009-01-11 03:22:12 $
-//  $Revision: 1.4 $
+//  $Date: 2009-01-13 08:20:37 $
+//  $Revision: 1.5 $
 //  $Author: zeus $
 //  $Locker:  $
 //  $State: Exp $
