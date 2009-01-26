@@ -847,7 +847,7 @@ ASM_END
     }
 }
 
-static char bios_svn_version_string[] = "$Revision: 1.7 $ $Date: 2009-01-13 08:20:37 $";
+static char bios_svn_version_string[] = "$Revision: 1.8 $ $Date: 2009-01-26 02:37:39 $";
 
 //--------------------------------------------------------------------------
 // print_bios_banner
