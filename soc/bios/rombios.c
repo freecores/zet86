@@ -960,7 +960,7 @@ ASM_END
     }
 }
 
-static char bios_svn_version_string[] = "$Revision: 1.9 $ $Date: 2009-02-06 03:48:27 $";
+static char bios_svn_version_string[] = "$Revision: 1.10 $ $Date: 2009-02-19 19:06:56 $";
 
 //--------------------------------------------------------------------------
 // print_bios_banner
@@ -2101,7 +2101,7 @@ post_default_ints:
 
   ;; Keyboard
   SET_INT_VECTOR(0x09, #0xF000, #int09_handler)
-  SET_INT_VECTOR(0x16, #0xF000, #int16_handler)
+  ;SET_INT_VECTOR(0x16, #0xF000, #int16_handler)
 
   xor  ax, ax
   mov  ds, ax
