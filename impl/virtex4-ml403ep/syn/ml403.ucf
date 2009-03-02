@@ -4,7 +4,6 @@
 NET sys_clk_in_ LOC = AE14;
 NET sys_clk_in_ IOSTANDARD = LVCMOS33;
 
-#NET trx LOC = W1;
 NET sram_clk_ LOC = AF7 ;
 
 #NET sram_flash_addr_[24] LOC = T21;
@@ -114,6 +113,8 @@ NET butw_ LOC = E9;  # W Button
 NET bute_ LOC = F10; # E Button
 NET butn_ LOC = E7;  # N Button
 NET buts_ LOC = A6;  # S Button
+
+NET trx_ LOC = W1;
 
 #NET led_[0]  LOC = G5;  #GPLED0
 #NET led_[1]  LOC = G6;  #GPLED1
